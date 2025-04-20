@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SendGPT - Ask Any Question</title>
+  
+  <!-- AdMob Ads Integration -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-app-pub-5911793928099175~6921786516" crossorigin="anonymous"></script>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f9f9f9;
+    }
+
+    header {
+      background: #343a40;
+      color: #fff;
+      padding: 1em;
+      text-align: center;
+      position: relative;
+    }
+
+    .logo {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      width: 60px;
+    }
+
+    .logo iframe {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+    }
+
+    main {
+      padding: 20px;
+      text-align: center;
+    }
+
+    textarea {
+      width: 90%;
+      height: 100px;
+      margin: 10px auto;
+      display: block;
+      font-size: 16px;
+      padding: 10px;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      margin-top: 10px;
+      cursor: pointer;
+    }
+
+    footer {
+      background: #ddd;
+      padding: 10px;
+      text-align: center;
+    }
+
+    #answerArea, #nextBtn, #exitBtn, #agreePopup {
+      display: none;
+    }
+
+    #agreePopup {
+      background: rgba(0,0,0,0.7);
+      color: #fff;
+      padding: 30px;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      z-index: 9999;
+    }
+
+    .banner-ad {
+      margin: 10px auto;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    <iframe loading="lazy" src="https://www.canva.com/design/DAGksCqCfQU/0DJgNfc7sbLphtIdWtoUkQ/view?embed" allowfullscreen></iframe>
+  </div>
+  <h1>SendGPT</h1>
+</header>
+
+<main id="mainContent">
+
+  <!-- Reward Video Ad Placeholder -->
+  <div id="rewardAd">
+    <p>Loading reward ad...</p>
+    <!-- Replace below with actual video ad implementation -->
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-5911793928099175"
+         data-ad-slot="6104959485"
+         data-ad-format="auto"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+
+  <!-- Terms Popup -->
+  <div id="agreePopup">
+    <h2>Terms & Conditions</h2>
+    <p>You must agree to our <a href="#terms">Terms</a> and <a href="#privacy">Privacy Policy</a>.</p>
+    <label><input type="checkbox" id="agreeCheck"> I Agree</label>
+    <br><br>
+    <button onclick="acceptTerms()">Continue</button>
+  </div>
+
+  <!-- Question Form -->
+  <form id="questionForm" onsubmit="getAnswer(event)">
+    <textarea id="question" placeholder="Ask your question..." required></textarea>
+    <button type="submit">Submit</button>
+  </form>
+
+  <!-- Answer -->
+  <div id="answerArea">
+    <h2>AI Answer:</h2>
+    <p id="aiAnswer">Loading...</p>
+  </div>
+
+  <button id="nextBtn" onclick="nextQuestion()">Next Question</button>
+  <button id="exitBtn" onclick="exitSite()">Exit</button>
+
+  <!-- AdMob Banner -->
+  <div class="banner-ad">
+    <ins class="adsbygoogle"
+         style="display:inline-block;width:320px;height:50px"
+         data-ad-client="ca-pub-5911793928099175"
+         data-ad-slot="1694941180"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+</main>
+
+<!-- Footer -->
+<footer>
+  <a href="#terms">Terms & Conditions</a> | <a href="#privacy">Privacy Policy</a>
+</footer>
+
+<!-- Terms -->
+<section id="terms" style="display:none;">
+  <h2>Terms & Conditions</h2>
+  <p>Welcome to SendGPT. By using this service...</p>
+  <!-- Insert your full terms here -->
+</section>
+
+<!-- Privacy -->
+<section id="privacy" style="display:none;">
+  <h2>Privacy Policy</h2>
+  <p>This website uses cookies and AdMob ads...</p>
+  <!-- Insert your full privacy policy here -->
+</section>
+
+<!-- JavaScript Logic -->
+<script>
+  window.onload = function() {
+    // Simulate Reward Ad Watch Complete after 5s
+    setTimeout(() => {
+      document.getElementById('rewardAd').style.display = 'none';
+      document.getElementById('agreePopup').style.display = 'flex';
+    }, 5000);
+  };
+
+  function acceptTerms() {
+    if (document.getElementById('agreeCheck').checked) {
+      document.getElementById('agreePopup').style.display = 'none';
+      document.getElementById('questionForm').style.display = 'block';
+      document.getElementById('exitBtn').style.display = 'inline-block';
+    } else {
+      alert("Please check the 'I Agree' box to continue.");
+    }
+  }
+
+  function getAnswer(event) {
+    event.preventDefault();
+    const question = document.getElementById('question').value;
+    document.getElementById('aiAnswer').textContent = "Generating answer for: " + question;
+    document.getElementById('answerArea').style.display = 'block';
+    document.getElementById('nextBtn').style.display = 'inline-block';
+  }
+
+  function nextQuestion() {
+    document.getElementById('question').value = '';
+    document.getElementById('answerArea').style.display = 'none';
+    document.getElementById('nextBtn').style.display = 'none';
+  }
+
+  function exitSite() {
+    alert("Thank you for using SendGPT!");
+    window.close(); // may not work on mobile browsers
+  }
+</script>
+
+</body>
+</html>
